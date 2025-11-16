@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bohol FiveHearts Travel and Tours</title>
+    <!-- Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Custom Styles for the bold header and typography */
+        :root {
+            --primary-color: #333; /* Dark text/accents */
+            --secondary-color: #fff; /* White */
+            --accent-color: #ff4500; /* Orange/Red for emphasis */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        .font-heading {
+            font-family: var(--font-heading);
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            /* !!! IMPORTANT: REPLACE URL BELOW with your high-res background image URL !!! 
+               You can use a placeholder for now, like: https://placehold.co/1920x1080/000000/FFFFFF?text=BOHOL+HERO+IMAGE */
+            background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=BOHOL+HERO+IMAGE'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.4) 100%); 
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            line-height: 1.1;
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Image Placeholder Style */
+        .img-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #ccc; 
+            color: #666;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-style: italic;
+            font-size: 0.9em;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .booking-form-modal {
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-body">
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-64 h-full bg-white shadow-xl z-[2000] transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-6">
+            <h2 class="font-heading text-2xl font-bold mb-6 text-gray-800">Menu</h2>
+            <ul class="space-y-4 text-lg">
+                <li><a href="#" class="block text-gray-600 hover:text-orange-600">Home</a></li>
+                <li><a href="#featured" class="block text-gray-600 hover:text-orange-600">3-Day Package</a></li>
+                <li><a href="#packages" class="block text-gray-600 hover:text-orange-600">Other Tours</a></li>
+                <li><a href="#bookings" class="block text-gray-600 hover:text-orange-600">Bookings</a></li>
+                <li><a href="#contact" class="block text-gray-600 hover:text-orange-600">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white shadow-md p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="font-heading text-xl md:text-2xl font-extrabold text-gray-900">Bohol FiveHearts</div> 
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-600 hover:text-orange-600 font-semibold transition-colors">Home</a>
+                <a href="#featured" class="text-gray-600 hover:text-orange-600 font-semibold transition-colors">3-Day Package</a>
+                <a href="#packages" class="text-gray-600 hover:text-orange-600 font-semibold transition-colors">Other Tours</a>
+                <a href="#bookings" class="text-gray-600 hover:text-orange-600 font-semibold transition-colors">Bookings</a>
+                <a href="#contact" class="text-gray-600 hover:text-orange-600 font-semibold transition-colors">Contact</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden text-2xl text-gray-700 hover:text-orange-600">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section: Mimicking the image format -->
+        <section class="hero-section flex items-start justify-start p-4 md:p-12">
+            <div class="hero-overlay absolute inset-0 z-10"></div>
+            <div class="hero-content relative z-20 text-white pt-20 md:pt-40 lg:pt-56 pl-4 md:pl-12">
+                <h1 class="font-heading font-black mb-6 uppercase text-shadow-lg">
+                    WELCOME TO <br>BOHOL FIVEHEARTS <br>TRAVEL AND TOURS
+                </h1>
+                <!-- Button that opens the booking modal -->
+                <button onclick="openBookingModal('3-Day Tour Package')" class="hero-button bg-white text-gray-900 px-8 py-3 text-lg font-bold rounded-md shadow-xl hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    BOOK YOUR TRIP NOW
+                </button>
+            </div>
+        </section>
+
+        <!-- FEATURED PACKAGE SECTION (3-Day Tour Package) -->
+        <section id="featured" class="py-12 md:py-20 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-heading text-3xl md:text-4xl font-extrabold text-gray-800">
+                        🌊🏝 Explore Bohol – Where Adventure Meets Paradise! 🏝🌊
+                    </h2>
+                    <p class="text-2xl font-bold text-orange-600 mt-3">
+                        🤩 3 DAYS BOHOL TOUR PACKAGE – Only ₱2,500 / person! 🤩
+                    </p>
+                    <p class="text-lg text-gray-600 mt-4">
+                        Looking for the perfect getaway? Enjoy Bohol’s most famous attractions at a budget-friendly price!
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 mb-12">
+                    <!-- Tour Details Box -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg flex-1 min-w-[300px] max-w-md border-t-4 border-blue-500">
+                        <h3 class="text-2xl font-semibold text-blue-600 mb-4 border-b pb-2">📅 Tour Details</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex justify-between items-center"><span class="font-bold">Duration:</span> <span>3 Days</span></li>
+                            <li class="flex justify-between items-center text-3xl font-black text-orange-600 py-2"><span>Rate:</span> <span>₱2,500 / person</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Inclusions Box -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg flex-1 min-w-[300px] max-w-md border-t-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-green-600 mb-4 border-b pb-2">✅ Package Inclusions</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li><i class="fas fa-bus mr-3 text-green-500"></i> Private Vehicle</li>
+                            <li><i class="fas fa-map-marker-alt mr-3 text-green-500"></i> Pick up/Drop off</li>
+                            <li><i class="fas fa-ticket-alt mr-3 text-green-500"></i> Entrance Fees/Environmental fee</li>
+                            <li><i class="fas fa-user-tie mr-3 text-green-500"></i> Driver/Boatman</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Tour Highlights Grid -->
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">📍 Tour Highlights (All-in-One Adventure)</h3>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-gray-700">
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-mountain mr-3 text-blue-600"></i> Chocolate Hills</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-eye mr-3 text-blue-600"></i> Tarsier Conservation</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-motorcycle mr-3 text-blue-600"></i> ATV Ride / Zipline / Cable Car</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-ship mr-3 text-blue-600"></i> Loboc River Cruise</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-tree mr-3 text-blue-600"></i> Man-Made Forest</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-umbrella-beach mr-3 text-blue-600"></i> Alona Beach</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-water mr-3 text-blue-600"></i> Hinagdanan Cave</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-hive mr-3 text-blue-600"></i> Bohol Bee Farm</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-dolphin mr-3 text-blue-600"></i> Dolphin Watching</li>
+                        <li class="flex items-center p-3 bg-blue-50 rounded-lg"><i class="fas fa-island-tropical mr-3 text-blue-600"></i> Balicasag Island</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button onclick="openBookingModal('3-Day Tour Package')" class="bg-orange-600 text-white px-10 py-4 text-xl font-bold rounded-full shadow-lg hover:bg-orange-700 transition-colors duration-300">
+                        BOOK THIS 3-DAY TOUR NOW
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- OTHER PACKAGES SECTION -->
+        <section id="packages" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="font-heading text-4xl font-extrabold text-gray-800 mb-10">Other Popular Tours</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Package Card 1 -->
+                    <div class="package-card bg-gray-50 rounded-xl shadow-lg overflow-hidden transition-all duration-300">
+                        <!-- !!! IMPORTANT: Replace the div below with an actual <img> tag (e.g., <img src="images/loboc-river-cruise.jpg" alt="Loboc River Cruise" class="w-full h-48 object-cover" />) -->
+                        <div class="img-placeholder">Loboc River Cruise Image</div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-heading font-semibold text-gray-900 mb-2">Loboc River Cruise</h3>
+                            <p class="text-gray-600 mb-4">Relaxing river tours and floating dining experience.</p>
+                            <button onclick="openBookingModal('Loboc River Cruise')" class="text-blue-600 font-bold hover:text-blue-800">Inquire & Book</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Package Card 2 -->
+                    <div class="package-card bg-gray-50 rounded-xl shadow-lg overflow-hidden transition-all duration-300">
+                        <div class="img-placeholder">Hinagdanan Cave Image</div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-heading font-semibold text-gray-900 mb-2">Hinagdanan Cave</h3>
+                            <p class="text-gray-600 mb-4">Explore the stunning illuminated underground pool.</p>
+                            <button onclick="openBookingModal('Hinagdanan Cave')" class="text-blue-600 font-bold hover:text-blue-800">Inquire & Book</button>
+                        </div>
+                    </div>
+
+                    <!-- Package Card 3 (ATV) -->
+                    <div class="package-card bg-gray-50 rounded-xl shadow-lg overflow-hidden transition-all duration-300">
+                        <div class="img-placeholder">Chocolate Hills ATV Image</div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-heading font-semibold text-gray-900 mb-2">Chocolate Hills ATV</h3>
+                            <p class="text-gray-600 mb-4">Thrilling off-road adventure around the iconic hills.</p>
+                            <button onclick="openBookingModal('Chocolate Hills ATV')" class="text-blue-600 font-bold hover:text-blue-800">Inquire & Book</button>
+                        </div>
+                    </div>
+
+                    <!-- Package Card 4 -->
+                    <div class="package-card bg-gray-50 rounded-xl shadow-lg overflow-hidden transition-all duration-300">
+                        <div class="img-placeholder">Dolphin Watching Image</div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-heading font-semibold text-gray-900 mb-2">Dolphin Watching</h3>
+                            <p class="text-gray-600 mb-4">Witness dolphins and whales in their natural habitat.</p>
+                            <button onclick="openBookingModal('Dolphin Watching')" class="text-blue-600 font-bold hover:text-blue-800">Inquire & Book</button>
+                        </div>
+                    </div>
+
+                    <!-- Package Card 5 -->
+                    <div class="package-card bg-gray-50 rounded-xl shadow-lg overflow-hidden transition-all duration-300">
+                        <div class="img-placeholder">Bohol Countryside Tour Image</div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-heading font-semibold text-gray-900 mb-2">Bohol Countryside Tour</h3>
+                            <p class="text-gray-600 mb-4">See all the major landmarks in one scenic day trip.</p>
+                            <button onclick="openBookingModal('Bohol Countryside Tour')" class="text-blue-600 font-bold hover:text-blue-800">Inquire & Book</button>
+                        </div>
+                    </div>
+
+                    <!-- Package Card 6 -->
+                    <div class="package-card bg-gray-50 rounded-xl shadow-lg overflow-hidden transition-all duration-300">
+                        <div class="img-placeholder">Bike Zipline Image</div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-heading font-semibold text-gray-900 mb-2">Bike Zipline</h3>
+                            <p class="text-gray-600 mb-4">Cycle across a canyon high above the trees for a unique thrill.</p>
+                            <button onclick="openBookingModal('Bike Zipline')" class="text-blue-600 font-bold hover:text-blue-800">Inquire & Book</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PENDING BOOKINGS SECTION (Admin View for Demo) -->
+        <section id="bookings" class="py-16 md:py-24 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="font-heading text-4xl font-extrabold text-gray-800 mb-10 text-center">
+                    <i class="fas fa-clock mr-3 text-orange-600"></i>Pending Bookings
+                </h2>
+                <div id="bookings-list" class="space-y-4">
+                    <!-- Booking requests will be dynamically loaded here by JavaScript -->
+                    <p class="text-center text-gray-500" id="loading-message">Loading bookings...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-16 md:py-24 bg-gray-900 text-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="font-heading text-4xl font-extrabold mb-8">Contact Us</h2>
+                <p class="text-xl mb-12">
+                    Limited slots only – hurry and tag your travel buddies! ✈️
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-10">
+                    <div class="text-center">
+                        <i class="fab fa-whatsapp text-4xl text-green-500 mb-3"></i>
+                        <p class="text-2xl font-bold">Whatsapp / Viber</p>
+                        <p class="text-xl">09235467789 / 09345677547</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-envelope text-4xl text-red-500 mb-3"></i>
+                        <p class="text-2xl font-bold">Email</p>
+                        <p class="text-xl">boholfivehearts@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-6 text-center">
+        <p>Bohol FiveHearts Travel and Tours | &copy; 2023 All rights reserved.</p>
+    </footer>
+
+    <!-- MODAL POPUP FOR BOOKING FORM -->
+    <div id="booking-modal" class="booking-form-modal fixed inset-0 flex items-center justify-center z-[1100] hidden">
+        <div class="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl relative">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="font-heading text-3xl font-bold text-gray-800 mb-4">Book Your <span id="modal-package-name" class="text-orange-600"></span></h3>
+            <p class="text-gray-600 mb-6">Fill out the details below to reserve your slot. We will contact you shortly!</p>
+            
+            <form id="booking-form">
+                <input type="hidden" id="package-input">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                    <input type="text" id="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="contact" class="block text-gray-700 font-semibold mb-2">Contact Number (Whatsapp/Viber)</label>
+                    <input type="tel" id="contact" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="mb-6">
+                    <label for="travel-date" class="block text-gray-700 font-semibold mb-2">Desired Travel Date</label>
+                    <input type="date" id="travel-date" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <button type="submit" class="w-full bg-orange-600 text-white p-3 font-bold rounded-lg hover:bg-orange-700 transition-colors duration-300" id="submit-booking-btn">
+                    Submit Reservation
+                </button>
+                <div id="status-message" class="mt-4 text-center font-semibold"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/fir
